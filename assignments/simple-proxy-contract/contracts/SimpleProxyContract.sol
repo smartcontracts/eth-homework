@@ -24,7 +24,7 @@ contract SimpleProxyContract {
     fallback() external payable {
         revert("Implement me!");
 
-        // 1. Use delegatecall to trigger the code of the implementation contract.
+        // 1. Use delegatecall (Solidity version, NOT assembly) to trigger the code of the implementation contract.
         // Read more about delegatecall here:
         // https://docs.soliditylang.org/en/v0.8.11/introduction-to-smart-contracts.html#delegatecall-callcode-and-libraries
         // See how to trigger delegatecall here:
