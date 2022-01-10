@@ -30,7 +30,7 @@ contract SimpleProxyContract {
         // See how to trigger delegatecall here:
         // https://docs.soliditylang.org/en/v0.8.11/units-and-global-variables.html#members-of-address-types
 
-        // 2. Use assembly to return or revert with the result of the delegatecall.
+        // 2. Use assembly to handle the result of the above delegatecall.
         // You must use assembly because you cannot use the `return` keyword within the fallback function.
     }
 }
