@@ -6,4 +6,9 @@ contract Counter {
     function increment() public {
         counter++;
     }
+
+    // Just using this to make sure you've correctly handled reverts!
+    function fail() public {
+        revert("This function should fail");
+    }
 }

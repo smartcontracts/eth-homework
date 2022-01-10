@@ -4,6 +4,7 @@
 
 Proxy contracts are a common and important construct in Ethereum smart contract development.
 Proxies generally use the `delegatecall` operation to execute the code of some other contract (called the `implementation`) against the proxy's own storage.
+It's worth noting that the term "proxy" is a bit of a misnomer because the proxy contract isn't acting like a middleman between you and the target contract, it's simply using the code of the target contract against its own storage.
 
 (insert drawing here once I switch over to Windows in a few minutes)
 
@@ -33,6 +34,8 @@ You'll write the logic for triggering `delegatecall` operations to a fixed `impl
 
 We'll be using a simple `Counter` contract as the reference (you can easily imagine the existence of many different `Counter` contracts at the same time).
 You can apply this same pattern to any sort of contract that you may want to cheaply duplicate.
+
+## Completion
 
 Pass all tests to complete the assignment:
 
