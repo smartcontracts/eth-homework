@@ -6,16 +6,16 @@ Proxy contracts are a common and important construct in Ethereum smart contract 
 Proxies generally use the `delegatecall` operation to execute the code of some other contract (called the `implementation`) against the proxy's own storage.
 It's worth noting that the term "proxy" is a bit of a misnomer because the proxy contract isn't acting like a middleman between you and the target contract, it's simply using the code of the target contract against its own storage.
 
-(insert drawing here once I switch over to Windows in a few minutes)
+![proxy1](https://user-images.githubusercontent.com/14298799/148847546-eda6e15f-85ab-4fd7-b45a-259fca1dd287.png)
 
 Developers use proxies for many reasons.
 One common use for the proxy pattern is to create a contract whose functionality can be easily upgraded.
 Contract code is immutable and can't be modified once a contract is deployed.
 However, we can use the `delegatecall` operation to execute the code of some other contract against our own storage.
-By modifying the target of this `delegatecall` operation we can change the code being executed within our proxy.
+By modifying the target of this operation we can change the code being executed within our proxy.
 Usually the ability to modify the target of the `delegatecall` is reserved for some privileged `owner` address (could be an EOA, a multisig, a governance contract, or anything in-between).
 
-(insert drawing here once I switch over to Windows in a few minutes)
+![proxy2](https://user-images.githubusercontent.com/14298799/148847589-141146c5-cd77-41b7-bab8-54eb2b77310f.png)
 
 Proxies can also be used to create lightweight copies of other contracts.
 It's often quite expensive to deploy smart contracts to Ethereum.
@@ -25,7 +25,7 @@ To do so, you simply need to deploy one "reference" contract with all of the cod
 You can create copies of the reference contract with a basic proxy that permanently points to the reference contract.
 Note that these copies are cheaper to deploy but end up being more expensive for end-users because of the additional code overhead that proxies introduce.
 
-(insert drawing here once I switch over to Windows in a few minutes)
+![proxy3](https://user-images.githubusercontent.com/14298799/148847629-14ca1d2e-3bb6-41a5-af17-d8cd1bbbc90b.png)
 
 ## Assignment
 
