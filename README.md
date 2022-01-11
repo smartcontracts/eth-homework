@@ -29,10 +29,6 @@ cd eth-homework
 yarn install
 ```
 
-```
-npm i --save-dev @types/mocha
-```
-
 ### Compiling contracts
 
 ```
