@@ -5,13 +5,6 @@ pragma solidity ^0.8.0;
  * @dev A simple proxy contract where the implementation address is set once and cannot be mutated.
  */
 contract SimpleProxyContract {
-    /**
-     * Address of the implementation contract for this proxy.
-     * NOTE: We're marking this as immutable to avoid accidental storage collisions. We'll go into
-     * the subject of storage collisions in a future lesson. For now, you may be interested in
-     * reading more about the immutable keyword:
-     * https://docs.soliditylang.org/en/v0.8.11/contracts.html#immutable
-     */
     address public immutable implementation;
 
     /**
@@ -22,18 +15,27 @@ contract SimpleProxyContract {
     }
 
     fallback() external payable {
-        revert("Implement me!");
+        (bool success, bytes memory data) = implementation.delegatecall(msg.data);
 
-        // 1. Use delegatecall (Solidity version, NOT assembly) to trigger the code of the implementation contract.
-        // Read more about delegatecall here:
-        // https://docs.soliditylang.org/en/v0.8.11/introduction-to-smart-contracts.html#delegatecall-callcode-and-libraries
-        // See how to trigger delegatecall here:
-        // https://docs.soliditylang.org/en/v0.8.11/units-and-global-variables.html#members-of-address-types
+        assembly
+        {
+            // delegatecall leaves the return data in a returndata buffer
+            // we have to go get it
 
-        // 2. Use assembly to handle the result of the above delegatecall.
-        // https://docs.soliditylang.org/en/v0.4.21/assembly.html
-        // In particular, examine how return data is handled from delegatecall. (returndatacopy, returndatasize, return, revert)
-        // If the call failed, revert with the error data. Otherwise, return with the returned data.
-        // You must use assembly because you cannot use the `return` keyword within the fallback function.
+            // how much data?
+            let size := returndatasize()
+
+            // where's the next available memory address?
+            let location := mload(0x40)
+
+            // copy the returndata buffer to memory
+            returndatacopy(location, 0, size)
+
+            // delegatecall bool is falsy on 0, truthy on non-zero
+            if iszero(success) { revert(location, size) }
+
+            // and as K said, return inside fallback must be in assembly
+            return(location, size)
+        }
     }
 }
