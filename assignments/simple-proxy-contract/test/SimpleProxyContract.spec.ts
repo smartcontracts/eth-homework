@@ -20,7 +20,7 @@ describe('SimpleProxyContract', () => {
     // Create a contract instance with the ABI of the Counter contract but located at the address
     // of the SimpleProxyContract. This is how we usually interact with proxy contracts when we
     // want to treat them as the contracts they're acting as a proxy for.
-    ProxyAsCounter = Counter.at(SimpleProxyContract.address)
+    ProxyAsCounter = Counter.attach(SimpleProxyContract.address)
   })
 
   describe('construction', () => {
