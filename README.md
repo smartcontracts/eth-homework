@@ -13,6 +13,9 @@ For the sake of flexibility, each assignment is a separate package with its own 
 ## Assignments
 
 - [Simple Proxy Contract](./assignments/simple-proxy-contract)
+- [Upgradeable Proxy Contract](./assignments/upgradeable-proxy-contract)
+- [Transparent Proxy Contract](./assignments/transparent-proxy-contract) (TODO)
+- [Multisig Wallet](./assignments/multisig-wallet)
 
 ## Setup
 
